@@ -259,7 +259,7 @@ function sdpFilterCodec(kind, codec, realSdp) {
     var allowed = []
     var rtxRegex = new RegExp('a=fmtp:(\\d+) apt=(\\d+)\r$');
     var codecRegex = new RegExp('a=rtpmap:([0-9]+) ' + escapeRegExp(codec))
-    var videoRegex = new RegExp('b=AS:10000000;(m=' + kind + ' .*?)( ([0-9]+))*\\s*$')
+    var videoRegex = new RegExp('x-google-max-bitrate=10000;x-google-min-bitrate=0;x-google-start-bitrate=6000;b=AS:10000;(m=' + kind + ' .*?)( ([0-9]+))*\\s*$')
 
     var lines = realSdp.split('\n');
 
