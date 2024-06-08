@@ -80,7 +80,7 @@ class VideoTransformTrack(MediaStreamTrack):
         elif self.transform == "rotate":
             # rotate image
             img = frame.to_ndarray(format="bgr24")
-            img = model(img,imgsz=320)[0]
+            img = model(img,imgsz=320)[0].plot()
             new_frame = VideoFrame.from_ndarray(img, format="bgr24")
             new_frame.pts = frame.pts
             new_frame.time_base = frame.time_base
