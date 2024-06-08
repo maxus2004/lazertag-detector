@@ -174,7 +174,7 @@ async def on_shutdown(app):
 
 
 if __name__ == "__main__":
-    codecs.vpx.DEFAULT_BITRATE = codecs.vpx.MAX_BITRATE
+    codecs.vpx.MIN_BITRATE = codecs.vpx.DEFAULT_BITRATE = codecs.vpx.MAX_BITRATE
     parser = argparse.ArgumentParser(
         description="WebRTC audio / video / data-channels demo"
     )
