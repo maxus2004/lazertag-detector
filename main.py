@@ -11,12 +11,16 @@ from aiohttp import web
 from aiortc import MediaStreamTrack, RTCPeerConnection, RTCSessionDescription, codecs
 from aiortc.contrib.media import MediaBlackhole, MediaRecorder, MediaRelay
 from av import VideoFrame
+from ultralytics import YOLO
+
 
 ROOT = os.path.dirname(__file__)
 
 logger = logging.getLogger("pc")
 pcs = set()
 relay = MediaRelay()
+
+model = YOLO("yolov8n-seg.pt")
 
 
 class VideoTransformTrack(MediaStreamTrack):
@@ -76,15 +80,8 @@ class VideoTransformTrack(MediaStreamTrack):
         elif self.transform == "rotate":
             # rotate image
             img = frame.to_ndarray(format="bgr24")
-            rows, cols, _ = img.shape
-            M = cv2.getRotationMatrix2D((cols / 2, rows / 2), frame.time * 45, 1)
-            img = cv2.warpAffine(img, M, (cols, rows))
-
-            # rebuild a VideoFrame, preserving timing information
-            new_frame = VideoFrame.from_ndarray(img, format="bgr24")
-            new_frame.pts = frame.pts
-            new_frame.time_base = frame.time_base
-            return new_frame
+            result = model(frame,classes=[0],imgsz=320)[0]
+            return result.plot()
         else:
             return frame
 
