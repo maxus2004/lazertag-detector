@@ -300,7 +300,7 @@ function sdpFilterCodec(kind, codec, realSdp) {
             if (skipMatch && !allowed.includes(parseInt(skipMatch[2]))) {
                 continue;
             } else if (lines[i].match(videoRegex)) {
-                sdp += ";x-google-max-bitrate=10000;x-google-min-bitrate=0;x-google-start-bitrate=6000;b=AS:10000;"+lines[i].replace(videoRegex, '$1 ' + allowed.join(' ')) + '\n';
+                sdp += lines[i].replace(videoRegex, '$1 ' + allowed.join(' ')) + '\n';
             } else {
                 sdp += lines[i] + '\n';
             }
