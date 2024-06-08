@@ -177,16 +177,16 @@ function start() {
         video: false
     };
 
-    // if (document.getElementById('use-audio').checked) {
-    //     const audioConstraints = {};
+    if (document.getElementById('use-audio').checked) {
+        const audioConstraints = {};
 
-    //     const device = document.getElementById('audio-input').value;
-    //     if (device) {
-    //         audioConstraints.deviceId = { exact: device };
-    //     }
+        const device = document.getElementById('audio-input').value;
+        if (device) {
+            audioConstraints.deviceId = { exact: device };
+        }
 
-    //     constraints.audio = Object.keys(audioConstraints).length ? audioConstraints : true;
-    // }
+        constraints.audio = Object.keys(audioConstraints).length ? audioConstraints : true;
+    }
 
     if (document.getElementById('use-video').checked) {
         const videoConstraints = {};
